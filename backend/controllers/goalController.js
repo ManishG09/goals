@@ -45,13 +45,13 @@ const updateGoal = async (req, res) => {
             return res.status(404).json({ error: 'Goal not found' });
         }
 
-        const user = await User.findById(req.user.id);
+      
 
-        if (!user) {
+        if (!req.user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        if (goal.user.toString() !== user.id) {
+        if (goal.user.toString() !== req.user.id) {
             return res.status(401).json({ error: 'User not authorized' });
         }
 
@@ -77,13 +77,13 @@ const deleteGoal = async (req, res) => {
             return res.status(404).json({ error: 'Goal not found' });
         }
 
-        const user = await User.findById(req.user.id);
+       
 
-        if (!user) {
+        if (!req.user) {
             return res.status(401).json({ error: 'User not found' });
         }
 
-        if (goal.user.toString() !== user.id) {
+        if (goal.user.toString() !== req.user.id) {
             return res.status(401).json({ error: 'User not authorized' });
         }
 
